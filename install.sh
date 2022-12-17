@@ -9,6 +9,7 @@ printf "press [1] :    To Install Eclipse for C & java (654MB needs to be downlo
 printf "press [2] :    To Install Eclipse for C (352 MB needs to be downloaded)"
 printf "press [3] :    To Install Eclipse for java (302 MB needs to be downloaded)"
 printf "press [x] :    To Exit"
+read -r choice
 
 while true; do
     read -r choice
