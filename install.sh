@@ -12,7 +12,7 @@ printf "press [x] :    To Exit"
 read -r choice
 
 while true; do
-    read -r choice
+    read -p choice
     case $choice in
         [1]*)
             installEclipseC
