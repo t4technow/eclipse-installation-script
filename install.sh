@@ -4,26 +4,39 @@ if [[ $EUID -ne 0 ]]; then
   echo "You must be a root user to run this script, please run sudo ./install.sh" 2>&1
   exit 1
 fi
-function showMenu(){
-  printf "press [1] :    To Install Eclipse for C & java (654MB needs to be downloaded)"
-  read -r choice
 
-  printf "press [2] :    To Install Eclipse for C (352 MB needs to be downloaded)"
-  read -r choice
+printf "press [1] :    To Install Eclipse for C & java (654MB needs to be downloaded)"
+printf "press [2] :    To Install Eclipse for C (352 MB needs to be downloaded)"
+printf "press [3] :    To Install Eclipse for java (302 MB needs to be downloaded)"
+printf "press [x] :    To Exit"
 
-  printf "press [3] :    To Install Eclipse for java (302 MB needs to be downloaded)"
-  read -r choice
-
-  printf "press [x] :    To Exit"
-  read -r choice
-}
-
-showMenu
-
-if ["$choice" != "1"] | ["$choice" != "2"] | ["$choice" != "3"] | ["$choice" != "x"]; then {
-  echo "Please enter a valid input"
-  showMenu
-}
+while true; do
+    read -r choice
+    case $choice in
+        [1]*)
+            installEclipseC
+            installEclipseJava
+            echo "Happy Coding"
+            break
+            ;;
+        [2]*)
+            installEclipseC
+            echo "Happy Coding"
+            break
+            ;;
+        [3]*)
+            installEclipseJava
+            echo "Happy Coding"
+            break
+            ;;
+        [xX]*)
+            echo 'Ok, exiting'
+            exit 1
+            ;;
+         *)
+            echo 'Invalid input :p' >&2
+    esac
+done
 
 if ["$choice" == "1"] | ["$choice" == "2"] | ["$choice" == "3"]; then
   if ! which curl > /dev/null; then
@@ -35,30 +48,6 @@ if ["$choice" == "1"] | ["$choice" == "2"] | ["$choice" == "3"]; then
     echo "Installing recquired dependency - Curl"
     sudo apt-get install tar -y
   fi
-fi
-
-if ["$choice" == "1"]; then
-  installEclipseC
-  installEclipseJava
-
-  echo "Happy Coding"
-fi
-
-
-if ["$choice" == "2"]; then
-  installEclipseC
-  echo "Happy Coding"
-fi
-
-
-if ["$choice" == "3"]; then
-  installEclipseJava
-  echo "Happy Coding"
-fi
-
-
-if ["$choice" == "x"]; then
-  exit 1
 fi
 
 function installEclipseC() {
